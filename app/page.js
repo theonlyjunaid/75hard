@@ -25,14 +25,14 @@ const Home = () => {
       console.log(error);
     }
   };
-  const logout = async () => {
-    try {
-      const account = new Account(client);
-      await account.deleteSession("current");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const logout = async () => {
+  //   try {
+  //     const account = new Account(client);
+  //     await account.deleteSession("current");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const fetchUser = async () => {
     try {
       const account = new Account(client);
