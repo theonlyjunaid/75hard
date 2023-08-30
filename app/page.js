@@ -19,7 +19,7 @@ const Home = () => {
     try {
       const account = new Account(client);
 
-      account.createOAuth2Session("google", "http://localhost:3000/tasks");
+      account.createOAuth2Session("google", "https://75harddays.vercel.app/tasks");
       console.log(account);
     } catch (error) {
       console.log(error);
