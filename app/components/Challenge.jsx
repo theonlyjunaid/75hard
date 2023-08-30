@@ -82,7 +82,7 @@ console.log(thisTask.$id)
                                                 {show === thisTask.day && <div className=" ">
                                                     {tasksToDo.map((taskToDo, index) => {
                                                         return (
-                                                            <div className='flex flex-wrap md:gap-10 gap-2 mt-5'>
+                                                            <div className='flex flex-wrap md:gap-10 gap-2 mt-5' key={index}>
                                                                 <h3>
                                                                     {taskToDo.split("_").join(" ")}
                                                                 </h3>
