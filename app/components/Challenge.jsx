@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { Client, Account, Databases, Query, ID } from "appwrite";
 
-const Challenge = ({ task, show, setShow ,client,compe}) => {
+const Challenge = ({ task, show, setShow ,client,compe,fetchData}) => {
     const [saving, setSaving] = useState(false)
     const [thisTask, setThisTask] = useState(task)
     const Show = (e) => {
@@ -28,6 +28,7 @@ const Challenge = ({ task, show, setShow ,client,compe}) => {
     }
 console.log(thisTask.$id)
     const handleSave = () => {
+
         setSaving(true)
         console.log(thisTask)
         const databases = new Databases(client);

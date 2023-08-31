@@ -17,6 +17,7 @@ const Page = () => {
   const [user, setUser] = useState(null);
   const [show, setShow] = useState(0);
   const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true)
 const [completed, setCompleted] = useState(0)
 const compe = (num) => {
   if(num==="Pending"){
@@ -26,6 +27,8 @@ const compe = (num) => {
 
   }
 }
+
+
 
   const router = useRouter();
   const fetchData = async (email) => {
@@ -44,17 +47,30 @@ const compe = (num) => {
         function (response) {
           console.log(response);
           setTasks(response.documents);
+          setCompleted(0)
           for (const item of response.documents) {
             compe(item["BALANCED_DIET"])
+          }
+          for (const item of response.documents) {
             compe(item["3_LITERS_OF_WATER_PER_DAY"])
+          }
+          for (const item of response.documents) {
             compe(item["EXERCISE_45-Minutes"])
+          }
+          for (const item of response.documents) {
             compe(item["WALK_45-Minutes"])
+          }
+          for (const item of response.documents) {
             compe(item["10_PAGES_OF_ANY_BOOK_EVERYDAY"])
+          }
+          for (const item of response.documents) {
             compe(item["DOCUMENT_EVERYTHING"])
           }
+          setLoading(false)
         },
         function (error) {
           console.log(error);
+
         }
       );
     } catch (error) {
@@ -92,6 +108,7 @@ const compe = (num) => {
   const createDoc = async () => {
     try {
       const databases = new Databases(client);
+      setLoading(true)
       for (let i = 1; i <= 75; i++) {
         const result = await databases.createDocument(
           "64ee24e2db24b58f528e",
@@ -109,11 +126,15 @@ const compe = (num) => {
           }
         );
         console.log(result);
-        //   result.then(function (response) {
-        //       console.log(response);
-        //    }, function (error) {
-        //       console.log(error);
-        //    });
+         setTasks((prev)=>[...prev,result])
+          setLoading(false)
+          // result.then(function (response) {
+          //     console.log(response);
+          //     setTasks((prev)=>[...prev,response])
+          //     setLoading(false)
+          //  }, function (error) {
+          //     console.log(error);
+          //  });
       }
     } catch (error) {
       console.log(error);
@@ -122,22 +143,27 @@ const compe = (num) => {
   return (
     <div>
       <PageNav logout={logout} />
-<UserCard user={user} tasks={tasks} completed={completed}/>
+     {loading?<div className="text-center text-2xl md:text-4xl flex justify-center items-center font-semibold h-[80vh] ">Seting up the environment...</div>: <>
+{tasks.length?<UserCard user={user} tasks={tasks} completed={completed}/>:""}
       <div className="container p-5 md:p-10 mx-auto">
         {tasks.map((task, index) => (
-          <Challenge key={index} task={task} show={show} setShow={setShow} client={client} compe={compe} />
+          <Challenge key={index} task={task} show={show} setShow={setShow} client={client} compe={compe} fetchData={fetchData} />
         ))}
       </div>
       {tasks.length == 0 ? (
+        <>
+        <div className="text-center text-2xl md:text-4xl flex justify-center items-center font-semibold  ">You have not started the challenge yet</div>
         <div
           onClick={createDoc}
-          className="bg-gray-900 hover:bg-gray-700 px-5 mx-5 md:mx-10 flex justify-center py-2 rounded-md text-white"
+          className="bg-gray-900 hover:bg-gray-700 cursor-pointer px-5   my-10 md:max-w-[50vw]  flex justify-center mx-auto py-2 rounded-md text-white"
         >
           Start Your Challenge Now
         </div>
+        </>
       ) : (
         ""
       )}
+      </>}
     </div>
   );
 };
