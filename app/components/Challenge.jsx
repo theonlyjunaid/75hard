@@ -1,10 +1,52 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Client, Account, Databases, Query, ID } from "appwrite";
 
-const Challenge = ({ task, show, setShow ,client,compe,fetchData}) => {
+const Challenge = ({ task, show, setShow ,client,fetchData,completed,setCompleted}) => {
     const [saving, setSaving] = useState(false)
     const [thisTask, setThisTask] = useState(task)
+    const [completedTask, setCompletedTask] = useState(0)
+    useEffect(() => {
+        setCompletedTask(0)
+        if(thisTask['BALANCED_DIET']==='Completed'){
+            setCompletedTask((prev)=>(prev+1))
+        }
+        if(thisTask['3_LITERS_OF_WATER_PER_DAY']==='Completed'){
+            setCompletedTask((prev)=>(prev+1))
+        }
+        if(thisTask['EXERCISE_45-Minutes']==='Completed'){
+            setCompletedTask((prev)=>(prev+1))
+        }
+        if(thisTask['WALK_45-Minutes']==='Completed'){
+            setCompletedTask((prev)=>(prev+1))
+        }
+        if(thisTask['10_PAGES_OF_ANY_BOOK_EVERYDAY']==='Completed'){
+            setCompletedTask((prev)=>(prev+1))
+        }
+        if(thisTask['DOCUMENT_EVERYTHING']==='Completed'){
+            setCompletedTask((prev)=>(prev+1))
+        }
+        if(thisTask['BALANCED_DIET']==='Pending'){
+            setCompletedTask((prev)=>(prev+0.5))
+        }
+        if(thisTask['3_LITERS_OF_WATER_PER_DAY']==='Pending'){
+            setCompletedTask((prev)=>(prev+0.5))
+        }
+        if(thisTask['EXERCISE_45-Minutes']==='Pending'){
+            setCompletedTask((prev)=>(prev+0.5))
+        }
+        if(thisTask['WALK_45-Minutes']==='Pending'){
+            setCompletedTask((prev)=>(prev+0.5))
+        }
+        if(thisTask['10_PAGES_OF_ANY_BOOK_EVERYDAY']==='Pending'){
+            setCompletedTask((prev)=>(prev+0.5))
+        }
+        if(thisTask['DOCUMENT_EVERYTHING']==='Pending'){
+            setCompletedTask((prev)=>(prev+0.5))
+        }
+
+console.log(completedTask)
+    }, [thisTask['BALANCED_DIET'],thisTask['3_LITERS_OF_WATER_PER_DAY'],thisTask['EXERCISE_45-Minutes'],thisTask['WALK_45-Minutes'],thisTask['10_PAGES_OF_ANY_BOOK_EVERYDAY'],thisTask['DOCUMENT_EVERYTHING']])
     const Show = (e) => {
         // if (e === show) {
         //     setShow(0)
@@ -12,6 +54,7 @@ const Challenge = ({ task, show, setShow ,client,compe,fetchData}) => {
         if (show !== e) { setShow(e) }
         // }
     }
+    
     const sShow = (e) => {
         if (e === show) {
             setShow(0)
@@ -26,7 +69,7 @@ const Challenge = ({ task, show, setShow ,client,compe,fetchData}) => {
         // console.log(item)
         setThisTask({ ...thisTask, [taskToDo]: status })
     }
-console.log(thisTask.$id)
+// console.log(thisTask.$id)
     const handleSave = () => {
 
         setSaving(true)
@@ -80,6 +123,14 @@ console.log(thisTask.$id)
                                                 <h3 className="mb-4 text-lg font-semibold leading-normal">
                                                     Day    {thisTask.day}
                                                 </h3>
+                                                <div className=" bg-gray-300 rounded-full mb-2 ">
+  <div
+    className="bg-blue-600 text-xs  font-medium truncate text-blue-100 text-center p-2 leading-none rounded-full"
+    style={{ width: (completedTask/6)*100+"%" }}
+  >
+    {parseFloat((completedTask/6)*100).toFixed(1)+'%'} Completed
+  </div>
+</div>
                                                 {show === thisTask.day && <div className=" ">
                                                     {tasksToDo.map((taskToDo, index) => {
                                                         return (

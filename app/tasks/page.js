@@ -6,6 +6,7 @@ import PageNav from "../components/PageNav";
 import { Client, Account, Databases, Query, ID } from "appwrite";
 import Challenge from "../components/Challenge";
 import UserCard from "../components/UserCard";
+import Footer from "../components/Footer";
 
 const client = new Client();
 
@@ -19,14 +20,14 @@ const Page = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true)
 const [completed, setCompleted] = useState(0)
-const compe = (num) => {
-  if(num==="Pending"){
-    setCompleted((prev)=>prev+0.5)
-  }else if(num==="Completed"){
-    setCompleted((prev)=>prev+1)
+// const compe = (num) => {
+//   if(num==="Pending"){
+//     setCompleted((prev)=>prev+0.5)
+//   }else if(num==="Completed"){
+//     setCompleted((prev)=>prev+1)
 
-  }
-}
+//   }
+// }
 
 
 
@@ -47,25 +48,25 @@ const compe = (num) => {
         function (response) {
           console.log(response);
           setTasks(response.documents);
-          setCompleted(0)
-          for (const item of response.documents) {
-            compe(item["BALANCED_DIET"])
-          }
-          for (const item of response.documents) {
-            compe(item["3_LITERS_OF_WATER_PER_DAY"])
-          }
-          for (const item of response.documents) {
-            compe(item["EXERCISE_45-Minutes"])
-          }
-          for (const item of response.documents) {
-            compe(item["WALK_45-Minutes"])
-          }
-          for (const item of response.documents) {
-            compe(item["10_PAGES_OF_ANY_BOOK_EVERYDAY"])
-          }
-          for (const item of response.documents) {
-            compe(item["DOCUMENT_EVERYTHING"])
-          }
+          // setCompleted(0)
+          // for (const item of response.documents) {
+          //   compe(item["BALANCED_DIET"])
+          // }
+          // for (const item of response.documents) {
+          //   compe(item["3_LITERS_OF_WATER_PER_DAY"])
+          // }
+          // for (const item of response.documents) {
+          //   compe(item["EXERCISE_45-Minutes"])
+          // }
+          // for (const item of response.documents) {
+          //   compe(item["WALK_45-Minutes"])
+          // }
+          // for (const item of response.documents) {
+          //   compe(item["10_PAGES_OF_ANY_BOOK_EVERYDAY"])
+          // }
+          // for (const item of response.documents) {
+          //   compe(item["DOCUMENT_EVERYTHING"])
+          // }
           setLoading(false)
         },
         function (error) {
@@ -144,10 +145,10 @@ const compe = (num) => {
     <div>
       <PageNav logout={logout} />
      {loading?<div className="text-center text-2xl md:text-4xl flex justify-center items-center font-semibold h-[80vh] ">Seting up the environment...</div>: <>
-{tasks.length?<UserCard user={user} tasks={tasks} completed={completed}/>:""}
+{tasks.length?<UserCard user={user} tasks={tasks} completed={completed} setCompleted={setCompleted}/>:""}
       <div className="container p-5 md:p-10 mx-auto">
         {tasks.map((task, index) => (
-          <Challenge key={index} task={task} show={show} setShow={setShow} client={client} compe={compe} fetchData={fetchData} />
+          <Challenge key={index} task={task} show={show} setShow={setShow} client={client}  fetchData={fetchData} completed={completed} setCompleted={setCompleted} />
         ))}
       </div>
       {tasks.length == 0 ? (
@@ -164,6 +165,7 @@ const compe = (num) => {
         ""
       )}
       </>}
+      <Footer/>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 "use client";
  
 import React from "react";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import { Client, Account } from "appwrite";
@@ -66,6 +67,7 @@ onClick={logout}
 >
   Logout
 </div> */}
+<Footer/>
     </div>
   );
 };

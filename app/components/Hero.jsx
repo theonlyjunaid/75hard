@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const Hero = ({ login }) => {
     return (
-        <div className="relative isolate -z-1 bg-white px-6 pt-8 md:pt-14 lg:px-8">
+        <div className="relative isolate -z-1 bg-white px-6 pt-8 md:pt-14 lg:px-8 min-h-[80vh]">
             <div className="relative mx-auto max-w-2xl py-24">
                 <div className="absolute inset-x-0 -top-[4rem] -z-10 transform-gpu overflow-hidden blur-3xl md:-top-[10rem]">
                     <svg

@@ -11,7 +11,7 @@ Hey, {user?.name.split(" ")[0]} you are doing great!. Keep it up!
      
 
     </div>
-    <div className='w-1/2 mx-auto container text-center'>
+    {/* <div className='w-4/5 md:w-1/2 mx-auto container text-center'>
     <div className=" bg-gray-300 rounded-full mb-2 ">
   <div
     className="bg-blue-600 text-xs  font-medium text-blue-100 text-center p-2 leading-none rounded-full"
@@ -21,9 +21,11 @@ Hey, {user?.name.split(" ")[0]} you are doing great!. Keep it up!
 </div>
 <div>
   
-   <span className='font-semibold'>{parseFloat(completed/tasks.length).toFixed(3)+'%'}</span>  of your chalenge tasks are completed
   </div>
     </div>
+ <div className=' text-center md:mx-10 mx-5'>
+  <span className='font-semibold'>{parseFloat(completed/tasks.length).toFixed(3)+'%'}</span>  of your chalenge tasks are completed
+  </div>   */}
   
     </>
   )

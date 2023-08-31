@@ -6,8 +6,8 @@ import Link from 'next/link'
 
 const menuItems = [
     // {
-    //     name: 'Home',
-    //     href: '/',
+    //     name: 'Created By @theonlyjunaid',
+    //     href: 'https://www.linkedin.com/in/theonlyjunaid/',
     // }
 
 ]
