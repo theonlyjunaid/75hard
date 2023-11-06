@@ -144,7 +144,7 @@ const [completed, setCompleted] = useState(0)
   return (
     <div>
       <PageNav logout={logout} />
-     {loading?<div className="text-center text-2xl md:text-4xl flex justify-center items-center font-semibold h-[80vh] ">Seting up the environment...</div>: <>
+     {loading?<div className="text-center text-2xl md:text-4xl flex justify-center items-center font-semibold h-[80vh] ">Setting up the environment...</div>: <>
 {tasks.length?<UserCard user={user} tasks={tasks} completed={completed} setCompleted={setCompleted}/>:""}
       <div className="container p-5 md:p-10 mx-auto">
         {tasks.map((task, index) => (

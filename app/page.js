@@ -67,7 +67,7 @@ onClick={logout}
 >
   Logout
 </div> */}
-<Footer/>
+{/* <Footer/> */}
     </div>
   );
 };
